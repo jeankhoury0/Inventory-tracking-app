@@ -1,7 +1,15 @@
 <p style="color: green"><%= notice %></p>
+<div>
+<h1>Inventory Tracking App</h1>
+    <a href="https://github.com/jeankhoury0/Inventorie-tracking-app" target="_blank"> <i class="fab fa-github"> </i> Check the repo</a>    
+    <br>
+    <a href="<%= inventory_item_index_path %>" class="btn btn-outline-dark">Get All Inventory Items </a>
+    <%= link_to 'Download as .xlsx', report_inventories_path(format: :xlsx), class: "btn btn-outline-dark" %>
 
-<h1>Inventories</h1>
-
+<br>
+<br>
+<br>
+<h2>Inventories</h2>
 <div id="inventories">
 <table class="table">
   <caption>Table of all available inventories</caption>
@@ -9,6 +17,7 @@
     <th scope="col">Action</th>
     <th scope="col">Name</th>
     <th scope="col">Item Count</th>
+    <th scope="col">Tot. Items Quantity</th>
   </tr>
 
   <% @inventories.each do |inventory| %>
@@ -17,7 +26,7 @@
       <%= link_to "", inventory, method: :delete, class:"fas fa-trash", alt:"delete"%></td>
       <td><%= link_to inventory.name, inventory %></td>
       <td><%= inventory.inventory_items.count %></td>
-
+      <td><%= inventory.total_quantity %></td>
   
     <tr>
   <% end %>
@@ -26,3 +35,4 @@
 </div>
 
 <%= link_to "Create New inventory", new_inventory_path, class:"btn btn-primary" %>
+</div>

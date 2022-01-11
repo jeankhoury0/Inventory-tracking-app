@@ -88,6 +88,4 @@ class InventoriesController < ApplicationController
   def inventory_params
     params.fetch(:inventory, {}).permit(:name, :remark)
   end
-
-  
 end

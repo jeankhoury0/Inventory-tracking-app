@@ -1,6 +1,9 @@
 <div>
-    <h1 class="text-primary">Inventory Tracking App</h1>
+    <h1 class="">Inventory Tracking App</h1>
+    <a href="https://github.com/jeankhoury0/Inventorie-tracking-app" target="_blank"> <i class="fab fa-github"> </i> Check the repo</a>    
+    <br><br>
+    <h2> Action </h2>
     <a href="<%= inventories_path %>" class="btn btn-primary">Inventeries</a>
-    <a href="<%= inventory_items_path %>" class="btn btn-primary">Items</a>
+    <a href="<%= inventory_item_index_path %>" class="btn btn-primary">Items</a>
     <%= link_to 'Download as .xlsx', report_inventories_path(format: :xlsx) %>
 </div>

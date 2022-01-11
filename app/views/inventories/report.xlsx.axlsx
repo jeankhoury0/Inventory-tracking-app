@@ -4,7 +4,6 @@ s = wb.styles
 header = s.add_style bg_color: "DD", sz: 16, b: true, alignment: { horizontal: :center }
 
 wb.add_worksheet(name: "sheet") do |sheet|
-  
   sheet.add_row ["Inventory Name", "Inventory Item", "Quantity"], style: header
   @inventories.each do |inventory|
     inventory.inventory_items.each do |inventory_item|
@@ -13,7 +12,7 @@ wb.add_worksheet(name: "sheet") do |sheet|
   end
   sheet.add_table "A1:C#{@records.count + 1}", name: "Records"
   sheet.column_widths 50, 40, 15
-  #chart
+  # chart
 
   # sheet.add_chart(Axlsx::Bar3DChart, barDir: :col) do |chart|
   #   chart.title = "tets"
@@ -21,5 +20,4 @@ wb.add_worksheet(name: "sheet") do |sheet|
   #   chart.start_at 7, 16
   #   chart.end_at 12, 31
   # end
-
 end
