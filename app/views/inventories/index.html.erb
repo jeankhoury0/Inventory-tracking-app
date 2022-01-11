@@ -3,12 +3,26 @@
 <h1>Inventories</h1>
 
 <div id="inventories">
+<table class="table">
+  <caption>Table of all available inventories</caption>
+  <tr>
+    <th scope="col">Action</th>
+    <th scope="col">Name</th>
+    <th scope="col">Item Count</th>
+  </tr>
+
   <% @inventories.each do |inventory| %>
-    <%= render inventory %>
-    <p>
-      <%= link_to "Show this inventory", inventory %>
-    </p>
+    <tr>
+      <td><%= link_to "", edit_inventory_path(inventory), class:"fas fa-edit", alt:"edit" %>
+      <%= link_to "", inventory, method: :delete, class:"fas fa-trash", alt:"delete"%></td>
+      <td><%= link_to inventory.name, inventory %></td>
+      <td><%= inventory.inventory_items.count %></td>
+
+  
+    <tr>
   <% end %>
+
+</table>
 </div>
 
-<%= link_to "New inventory", new_inventory_path %>
+<%= link_to "Create New inventory", new_inventory_path, class:"btn btn-primary" %>

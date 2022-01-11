@@ -1,4 +1,17 @@
+<div class="m-5">
 <%= form_with(model: inventory) do |form| %>
+  <%= form.label :name, class:"form-label"%>
+  <%= form.text_field :name, class:"form-control"%>
+  <br>
+  <%= form.label :remark, class:"form-label" %>
+  <%= form.text_area :remark, class:"form-control" %>
+  <br>
+
+  <div>
+    <%= form.submit class:"btn btn-primary" %>
+  </div>
+
+
   <% if inventory.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(inventory.errors.count, "error") %> prohibited this inventory from being saved:</h2>
@@ -11,7 +24,6 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.submit %>
-  </div>
+
 <% end %>
+</div>

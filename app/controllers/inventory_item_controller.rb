@@ -1,8 +1,9 @@
 class InventoryItemController < ApplicationController
-  before_action :set_inventories
+  before_action :set_inventory
 
   def index
-    render json: @InventoryItems if request.content_type == "application/json"
+    @inventory_items = InventoryItem.all
+    # render json: @InventoryItems if request.content_type == "application/json"
   end
 
   def show
@@ -11,6 +12,7 @@ class InventoryItemController < ApplicationController
 
   def new
     @inventory_item = InventoryItem.new
+    @inventories = Inventory.all
   end
 
   def create
@@ -26,18 +28,22 @@ class InventoryItemController < ApplicationController
     end
   end
 
+  def increment
+    # MOUSE
+    # ...
+    # Add to inventory
+    # count: ---, inventory: ---
+    @inventory_item = InventoryItem.find(params[:id])
+    @inventory_item.increment(@inventory, params[:count] || 1)
+  end
+
   private
 
   def inventory_item_params
-    params.permit(:title, :quantity, :inventory_id)
+    params.permit(:title, :price, :remark)
   end
 
-  def set_inventories
-    @inventory_items =
-      if params[:inventory_id]
-        Inventory.find(params[:inventory_id]).inventory_items
-      else
-        InventoryItem.all
-      end
+  def set_inventory
+    @inventory = Inventory.find(params[:inventory_id]) if params[:inventory_id]
   end
 end
