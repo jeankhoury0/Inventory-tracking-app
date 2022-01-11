@@ -18,7 +18,7 @@ def seed
 
   Inventory.create(
     [
-      { name: "Montreal Warehouse", remark: "Montreal location heated has it gets very cold sometime"},
+      { name: "Montreal Warehouse", remark: "Montreal location heated has it gets very cold sometime" },
       { name: "Miami Warehouse" },
       { name: "West Tokyo Warehouse" },
       { name: "Space Warehouse" }
@@ -30,9 +30,9 @@ def seed
       item_quantity = Faker::Number.non_zero_digit
       Record.create(
         {
-          quantity:          item_quantity,
+          quantity: item_quantity,
           inventory_item_id: item.id,
-          inventory_id:      inventory.id
+          inventory_id: inventory.id
         }
       )
     end

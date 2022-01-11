@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_08_214926) do
-
+ActiveRecord::Schema.define(version: 20_220_108_214_926) do
   create_table "inventories", force: :cascade do |t|
     t.string "name"
     t.string "remark"
@@ -33,7 +32,8 @@ ActiveRecord::Schema.define(version: 2022_01_08_214926) do
     t.integer "inventory_item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["inventory_id", "inventory_item_id"], name: "index_records_on_inventory_id_and_inventory_item_id", unique: true
+    t.index %w[inventory_id inventory_item_id], name: "index_records_on_inventory_id_and_inventory_item_id",
+                                                unique: true
     t.index ["inventory_id"], name: "index_records_on_inventory_id"
     t.index ["inventory_item_id"], name: "index_records_on_inventory_item_id"
   end
