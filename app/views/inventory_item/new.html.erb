@@ -1,13 +1,22 @@
 <div>
     <h2>Create New inventory item</h2>
-    <%= form_with url: "/inventory_item" do |form| %>
+    <%= form_with url: "/inventory_item" do |form|%>
         <%= form.label :title %>
         <%= form.text_field :title %>
 
         <%= form.label :quantity %>
         <%= form.text_field :quantity %>
         <%= form.label :inventory_id %>
-        <%= form.text_field :inventory_id %>
+        <%= form.text_field :inventory_id, list: "inventory-id-list" %>
+        <br>
+        <datalist id="inventory-id-list">
+            <% @inventories.each do |inventory|%>
+                <option value="<%= inventory.id%>"> <%= inventory.name%> </option>
+            <%end%>
+        </datalist>
+
+
+       
         <%= form.submit %>
 
     <% end %>

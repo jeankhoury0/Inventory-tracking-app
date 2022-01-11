@@ -1,0 +1,6 @@
+<div>
+    <h1 class="text-primary">Inventory Tracking App</h1>
+    <a href="<%= inventories_path %>" class="btn btn-primary">Inventeries</a>
+    <a href="<%= inventory_items_path %>" class="btn btn-primary">Items</a>
+    <%= link_to 'Download as .xlsx', report_inventories_path(format: :xlsx) %>
+</div>

@@ -23,8 +23,7 @@ class InventoriesController < ApplicationController
 
     respond_to do |format|
       if @inventory.save
-        # TODO
-        Inventory.redirect_to_inventory_url
+        redirect_to inventory_url(@inventory), notice: "Inventory was successfully created."
         format.json { render :show, status: :created, location: @inventory }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,6 +57,26 @@ class InventoriesController < ApplicationController
     end
   end
 
+  # POST /inventories/1/increment
+  # needs inventory_item_id and count
+  def increment
+    # MONTREAL ITEMS
+    # ...
+    # Add an item
+    # count: ---, item: ---
+    @inventory = Inventory.find(params[:id])
+    @inventory_item = InventoryItem.find(params[:inventory_item_id], params[:count] || 1)
+    @inventory.increment(@inventory_item, params[:count] || 1)
+  end
+
+  def report
+    @inventories = Inventory.all
+    @records = Record.all
+    respond_to do |format|
+      format.xlsx { render xlsx: "report" }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -67,12 +86,8 @@ class InventoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def inventory_params
-    params.fetch(:inventory, {})
+    params.fetch(:inventory, {}).permit(:name, :remark)
   end
 
-  def redirect_to_inventory_url
-    format.html do
-      redirect_to inventory_url(@inventory), notice: "Inventory was successfully created."
-    end
-  end
+  
 end

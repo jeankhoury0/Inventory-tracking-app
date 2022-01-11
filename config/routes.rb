@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
-  root "inventory_item#index"
+  root "main#index"
   
-  get "/new-inventory-item", to: "inventory_item#create"
-  resources :inventory_item
-
-  resources :inventories do 
-    resources :inventory_item
+  resources :inventory_item do
+    get "inventory_items", to: "inventory_item#index" 
+    get "/new-inventory-item", to: "inventory_item#create"
   end
+ 
+  resources :inventories do
+    resources :inventory_item do
+      post :increment, on: :member
+    end
 
-
+    get :report, on: :collection
+    post :increment, on: :member
+  end
 end

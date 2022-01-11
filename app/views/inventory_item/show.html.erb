@@ -1,7 +1,11 @@
 <div class="bg-red">
     <h1> <%= @inventory_item.title %> </h1>
-    <h1> <%= @inventory_item.quantity %> </h1>
-    <h1> Inventory ID <%= @inventory_item.inventory_id %> </h1>
+    <h1> <%= @inventory_item.price %> </h1>
+    <%
+=begin%>
+ <h1> Inventory ID <%= @inventory_item.inventory_id %> </h1> 
+<%  
+=end%>
     <h3> Created at: <%= @inventory_item.created_at %> </h3>
 
 </div>
