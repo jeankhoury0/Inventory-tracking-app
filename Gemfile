@@ -40,17 +40,12 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "bootsnap", require: false
 
 gem "faker", "~> 1.6", ">= 1.6.6"
-gem "rubocop"
-gem "rubocop-performance"
-gem "rubocop-rails"
-gem "rubocop-rake"
-gem "rubocop-rspec"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 gem "caxlsx"
 gem "caxlsx_rails"
 gem "rubyzip"
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -58,12 +53,20 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]
   # Use sqlite3 as the database for Active Record
-  gem "sqlite3", "~> 1.4"
+  gem "rubocop"
+  gem "rubocop-performance"
+  gem "rubocop-rails"
+  gem "rubocop-rake"
+  gem "rubocop-rspec"
+
+
+
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "rails-erd"
+  gem "sqlite3"
   gem "web-console"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
@@ -77,7 +80,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  gem "sqlite3", "~> 1.4"
   gem "webdrivers"
 end
 

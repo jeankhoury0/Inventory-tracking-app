@@ -23,7 +23,12 @@
   <% @inventories.each do |inventory| %>
     <tr>
       <td><%= link_to "", edit_inventory_path(inventory), class:"fas fa-edit", alt:"edit" %>
-      <%= link_to "", inventory, method: :delete, class:"fas fa-trash", alt:"delete"%></td>
+      <%= link_to "", inventory_path(inventory), data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Are you sure?"
+      },
+      class:"fas fa-trash"
+      %>
       <td><%= link_to inventory.name, inventory %></td>
       <td><%= inventory.inventory_items.count %></td>
       <td><%= inventory.total_quantity %></td>

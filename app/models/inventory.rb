@@ -5,13 +5,14 @@ class Inventory < ApplicationRecord
   has_many :inventory_items, through: :records
 
   def increment(inventory_item, count = 1)
-    record = Record.find_or_create_by(inventory_item_id: inventory_item.id, inventory_id: id)
+    record = Record.find_or_create_by(inventory_item_id: inventory_item.id, inventory_id: self.id)    
     record.quantity += count
     record.save
   end
 
   def quantity(inventory_item)
     record = Record.find_by(inventory_item_id: inventory_item.id, inventory_id: id)
+    puts record
     record.quantity
   end
 

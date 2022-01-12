@@ -19,9 +19,12 @@
     <tr>
       <td><%= record.inventory_item.id %></td>
       <td><%= record.inventory_item.title %></td>
-      <td><%= record.quantity %></td>
-    <tr>
+      <td>
+          <%= button_to "-", increment_inventory_path(:inventory_item_id => record.inventory_item_id, :count => -1), form: {style: 'display:inline-block;'}%>
+          <%= record.quantity %>
+          <%= button_to "+", increment_inventory_path(:inventory_item_id => record.inventory_item_id, :count => 1), form: {style: 'display:inline-block;'}%>
   <% end %>
+    <tr>
 
 </table>
 </div>

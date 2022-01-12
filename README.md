@@ -1,13 +1,16 @@
 # README
 ## About
 Inventory tracking app that allow you to create inventory and inventory items and to asign inventory item to inventory.
+
+**Application was published on https://inventory-tracking-2022.herokuapp.com/**
+
 Feature: 
 
 1. Generate report with one click that shows inventory status with graph
 2. **TODO** Bulk export csv 
 3. View inventory and inventory item 
 4. Create, read, update, delete inventory and inventory items
-5. API call return ``` json ```
+5. API endpoint return ``` json ```
 
 # Configuration
 * Ruby Version: 3.0
@@ -43,3 +46,23 @@ For linting, I am using rubocop via the bundler
 ## ERD
 Generate Entity-Relationship Diagrams for the app by running
 > ``` bundle exec erd ```
+
+![Intenty Realtiion diagram](erd.png)
+
+# Endpoints
+"Production" environment [^1]
+
+"local" environement : http://localhost:3000 (or another PORT)
+
+
+
+| Type          | Endpoint |        Body | What it does |
+| -----------:  | :----------- | :----------- | :----------- |
+| GET        | /inventories       |    | Return list of all inventories
+| POST       | /inventories        | { "name"*,  "remark" }   | Create an inventory item and return that inventory
+| GET        | /inventories?id       |    | Return inventory of {id}
+
+
+
+
+[^1]: The environment that was setup on [https://inventory-tracking-2022.herokuapp.com/] 
