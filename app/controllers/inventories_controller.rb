@@ -1,13 +1,25 @@
+# frozen_string_literal: true
+
+# Controller for inventory controller
 class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[show edit update destroy]
 
-  # GET /inventories or /inventories.json
+  # GET /inventories
   def index
     @inventories = Inventory.all
+    respond_to do |format|
+      format.json { render json: @inventories }
+      format.html { render :index }
+    end
   end
 
-  # GET /inventories/1 or /inventories/1.json
-  def show; end
+  # GET /inventories/1
+  def show
+    respond_to do |format|
+      format.json { render json: @inventory }
+      format.html { render :show }
+    end
+  end
 
   # GET /inventories/new
   def new
@@ -17,17 +29,18 @@ class InventoriesController < ApplicationController
   # GET /inventories/1/edit
   def edit; end
 
-  # POST /inventories or /inventories.json
+  # POST /inventories
   def create
     @inventory = Inventory.new(inventory_params)
-
-    respond_to do |format|
-      if @inventory.save
-        redirect_to inventory_url(@inventory), notice: "Inventory was successfully created."
-        format.json { render :show, status: :created, location: @inventory }
-      else
-        format.html { render :new, status: :unprocessable_entity }
+    if @inventory.save
+      respond_to do |format|
+        format.json { render json: @inventory, status: :created, location: @inventory }
+        format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully created."}
+      end
+    else
+      respond_to do |format|
         format.json { render json: @inventory.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -49,6 +62,7 @@ class InventoriesController < ApplicationController
 
   # DELETE /inventories/1 or /inventories/1.json
   def destroy
+    @inventory = Inventory.find(params[:id])
     @inventory.destroy
 
     respond_to do |format|
@@ -60,13 +74,10 @@ class InventoriesController < ApplicationController
   # POST /inventories/1/increment
   # needs inventory_item_id and count
   def increment
-    # MONTREAL ITEMS
-    # ...
-    # Add an item
-    # count: ---, item: ---
     @inventory = Inventory.find(params[:id])
-    @inventory_item = InventoryItem.find(params[:inventory_item_id], params[:count] || 1)
-    @inventory.increment(@inventory_item, params[:count] || 1)
+    @inventory_item = InventoryItem.find(params[:inventory_item_id])
+    @inventory.increment(@inventory_item, params[:count].to_i || 1)
+    redirect_to @inventory
   end
 
   def report
