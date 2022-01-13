@@ -12,7 +12,6 @@ class Inventory < ApplicationRecord
 
   def quantity(inventory_item)
     record = Record.find_by(inventory_item_id: inventory_item.id, inventory_id: id)
-    puts record
     record.quantity
   end
 

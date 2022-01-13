@@ -13,8 +13,8 @@ class InventoryTest < ActiveSupport::TestCase
   end
 
   test "should not save inventory with a name superior to 50" do
-    inventory_name_superior_to_50 = Inventory.new(remark: "Montreal location heated has it gets very cold sometime")
-    assert_not(inventory_name_superior_to_50.save, "Saved the Inventory with a name superior to 50")
+    inventory_sup_to_fifty = Inventory.new(name: "Montreal location heated has it gets very cold sometime")
+    assert_not(inventory_sup_to_fifty.save, "Saved the Inventory with a name superior to 50")
   end
 
   test "should save inventory with no remark" do

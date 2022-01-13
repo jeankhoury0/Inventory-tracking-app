@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require "faker"
 
 def seed
   InventoryItem.create(
@@ -12,7 +13,13 @@ def seed
       { title: "Mouse", remark: "This is a mouse", price: 20 },
       { title: "Keyboard", remark: "This is a keyboard", price: 25 },
       { title: "Monitor", remark: "This is a Monitor", price: 299 },
-      { title: "Webcam", remark: "This is a Webcam", price: 300 }
+      { title: "Webcam", remark: "This is a Webcam", price: 300 },
+      { title: "Camera", remark: "This is a Camera", price: 20 },
+      { title: "Heaphone", remark: "This is a Heaphone", price: 20 },
+      { title: "Dongle", remark: "This is a Dongle", price: 20 },
+      { title: "Whiteboard", remark: "This is a Whiteboard", price: 20 },
+      { title: "HDMI cable", remark: "This is a HDMI cable", price: 10 },
+      { title: "tablet", remark: "This is a tablet", price: 600 },
     ]
   )
 

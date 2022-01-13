@@ -3580,11 +3580,11 @@ Style/FormatStringToken:
   VersionChanged: '1.0'
   IgnoredMethods: []
 
-Style/FrozenStringLiteralComment:
+Style/:
   Description: >-
                  Add the frozen_string_literal comment to the top of files
                  to help transition to frozen string literals by default.
-  Enabled: true
+  Enabled: false
   VersionAdded: '0.36'
   VersionChanged: '0.79'
   EnforcedStyle: always
