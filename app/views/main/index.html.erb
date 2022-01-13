@@ -1,9 +1,25 @@
-<div>
-    <h1 class="">Inventory Tracking App</h1>
-    <a href="https://github.com/jeankhoury0/Inventorie-tracking-app" target="_blank"> <i class="fab fa-github"> </i> Check the repo</a>    
-    <br><br>
-    <h2> Action </h2>
-    <a href="<%= inventories_path %>" class="btn btn-primary">Inventeries</a>
-    <a href="<%= inventory_item_index_path %>" class="btn btn-primary">Items</a>
-    <%= link_to 'Download as .xlsx', report_inventories_path(format: :xlsx) %>
+<p style="color: green"><%= notice %></p>
+<div class="container-fluid">
+        <div class="bg-dark p-3">
+            <h1 class="text-light">Inventory Tracking App</h1>
+            <a href="https://github.com/jeankhoury0/Inventorie-tracking-app" target="_blank"> <i class="fab fa-github"> </i> Check the repo </a>    
+            <br><br>
+            <div>
+                <%= link_to 'Download as .xlsx', report_inventories_path(format: :xlsx), class: "btn btn-light" %>
+                <%= link_to 'Download as .csv', report_inventories_path(format: :csv), class: "btn btn-outline-light" %>
+            </div>
+            <br>
+        </div>
+        <br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-lg-6 ">
+                    <%= render "inventory_items/index" %>
+                </div>
+                <div class="col-md-12 col-lg-6">
+                    <%= render "inventories/index" %>
+                </div>
+            </div>
+        </div>
+
 </div>

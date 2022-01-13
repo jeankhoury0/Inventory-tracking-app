@@ -1,3 +1,6 @@
 class MainController < ApplicationController
-  def index; end
+  def index
+    @inventory_items = InventoryItem.all
+    @inventories = Inventory.all
+  end
 end

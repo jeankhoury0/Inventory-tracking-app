@@ -1,5 +1,5 @@
-class InventoryItemController < ApplicationController
-  before_action :set_inventory
+class InventoryItemsController < ApplicationController
+  before_action :set_inventory_item, only: %i[show edit update destroy]
 
   # GET /inventory_item
   def index
@@ -29,8 +29,8 @@ class InventoryItemController < ApplicationController
     @inventory_item = InventoryItem.new(inventory_item_params)
     if @inventory_item.save
       respond_to do |format|
-        format.json { render json: @inventory_item, status: :created, location: @inventory }
-        format.html { redirect_to inventory_item_url(@inventory_item_params), notice: "Inventory Item successfully created."}
+        format.json { render json: @inventory_item, status: :created, location: @inventory_item }
+        format.html { redirect_to inventory_item_url(@inventory_item), notice: "Inventory Item successfully created."}
       end
     else
       respond_to do |format|
@@ -67,10 +67,6 @@ class InventoryItemController < ApplicationController
   end
 
   def increment
-    # MOUSE
-    # ...
-    # Add to inventory
-    # count: ---, inventory: ---
     @inventory_item = InventoryItem.find(params[:id])
     @inventory_item.increment(@inventory, params[:count] || 1)
   end
@@ -87,10 +83,10 @@ class InventoryItemController < ApplicationController
   private
 
   def inventory_item_params
-    params.permit(:title, :price, :remark)
+    params.fetch(:inventory_item, {}).permit(:title, :price, :remark)
   end
 
-  def set_inventory
-    @inventory = Inventory.find(params[:inventory_id]) if params[:inventory_id]
+  def set_inventory_item
+    @inventory_item = InventoryItem.find(params[:id])
   end
 end
