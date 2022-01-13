@@ -1,7 +1,6 @@
 <div id="<%= dom_id inventory %>">
 <h1> Stock in: <span class="text-secondary"><%= inventory.name  %> | </span> 
     <%= link_to "", edit_inventory_path(@inventory), class:"fas fa-edit", alt:"edit" %>
-    <%= link_to "", @inventory, method: :delete, class:"fas fa-trash", alt:"delete"%>
 </h1>
 
 <p class="font-weight-bold"><%= inventory.remark %></p>

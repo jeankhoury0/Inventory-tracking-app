@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "csv"
+
 # Controller for inventory controller
 class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[show edit update destroy]
@@ -15,6 +17,7 @@ class InventoriesController < ApplicationController
 
   # GET /inventories/1
   def show
+    @inventory_items = InventoryItem.all
     respond_to do |format|
       format.json { render json: @inventory }
       format.html { render :show }
@@ -85,6 +88,7 @@ class InventoriesController < ApplicationController
     @records = Record.all
     respond_to do |format|
       format.xlsx { render xlsx: "report" }
+      format.csv { send_data @inventories.to_csv, filename: "Inventory-Report-#{Date.today}.csv" }
     end
   end
 
