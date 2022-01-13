@@ -10,8 +10,8 @@
   <tr>
     <th scope="col">Item_ID</th>
     <th scope="col">Name</th>
-        <th scope="col">Quantity</th>
-
+    <th scope="col">Quantity</th>
+    <th scope="col">Last update</th>
   </tr>
 
     <% inventory.records.each do |record| %>
@@ -22,6 +22,7 @@
           <%= button_to "-", increment_inventory_path(:inventory_item_id => record.inventory_item_id, :count => -1), form: {style: 'display:inline-block;'}%>
           <%= record.quantity %>
           <%= button_to "+", increment_inventory_path(:inventory_item_id => record.inventory_item_id, :count => 1), form: {style: 'display:inline-block;'}%>
+          <td><%= record.updated_at.strftime('%m-%d |  %T') %></td>
   <% end %>
     <tr>
 

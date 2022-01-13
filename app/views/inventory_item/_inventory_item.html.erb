@@ -1,0 +1,32 @@
+<div>
+<h1> Stock for: <span class="text-secondary"><%= @inventory_item.title  %> | </span> 
+    <%= link_to "", edit_inventory_item_path(@inventory_item), class:"fas fa-edit", alt:"edit" %>
+</h1>
+
+<p class="font-weight-bold"><%= @inventory_item.remark %></p>
+
+<table class="table">
+  <caption>Table of all available items: <%= @inventory_item.title %> </caption>
+  <tr>
+    <th scope="col">Item_ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Quantity</th>
+    <th scope="col">Last update</th>
+
+  </tr>
+
+    <% @inventory_item.records.each do |record| %>
+    <tr>
+      <td><%= record.inventory.id %></td>
+      <td><%= record.inventory.name %></td>
+      <td>
+          <%= button_to "-", increment_inventory_item_path(:inventory_id => record.inventory_id, :count => -1), form: {style: 'display:inline-block;'}%>
+          <%= record.quantity %>
+          <%= button_to "+", increment_inventory_item_path(:inventory_id => record.inventory_id, :count => 1), form: {style: 'display:inline-block;'}%>
+      <td><%= record.updated_at.strftime('%m-%d |  %T') %></td>
+    <tr>
+  <% end %>
+
+
+</table>
+</div>

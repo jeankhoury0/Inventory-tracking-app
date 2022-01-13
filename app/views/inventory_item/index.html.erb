@@ -1,26 +1,35 @@
 <div class="container">
-    <h1 class="text-primary">Inventory Control System</h1>
-    
+    <h1>Inventory Tracking App</h1>
+    <h2>Inventorie Items</h2>
+    <div id="inventory_item">
     <table class="table">
-        <caption>List of all the items</caption>
-        <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Actions</th>
-        </tr>
-        <% @inventory_items.each do |inventory_item| %>
-        <tr>
-            <td> <%= inventory_item.title %> </td>
-            <td> 
-                <a href="<%= inventory_item_path(inventory_item) %>">Show</a>
-                <a href="">Edit</a>
-                <a href="">Delete</a>
-            </td>
+    <caption>Table of all available inventories</caption>
+    <tr>
+        <th scope="col">Action</th>
+        <th scope="col">Name</th>
+        <th scope="col">Present in</th>
+        <th scope="col">Tot. Items Quantity</th>
+    </tr>
 
-        <% end %>
-        </tr>
+    <% @inventory_items.each do |inventory_item| %>
+        <tr>
+        <td><%= link_to "", edit_inventory_item_path(inventory_item), class:"fas fa-edit", alt:"edit" %>
+        <%= link_to "", inventory_item_path(inventory_item), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+        },
+        class:"fas fa-trash"
+        %>
+        <td><%= link_to inventory_item.title, inventory_item %> | $<%= inventory_item.price.to_i %></td>
+        <td><%= inventory_item.inventories.count %> Inv.</td>
+        <td><%= inventory_item.total_quantity %></td>
+    
+        <tr>
+    <% end %>
+
     </table>
     
-    <a href="/inventory_item/new" class="btn btn-primary">Create New Item</a>
+    <a href="/inventory_item/new" class="btn btn-primary disabled">Create New Item</a>
 
     
 </div>

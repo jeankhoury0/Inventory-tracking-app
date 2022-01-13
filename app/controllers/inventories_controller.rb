@@ -52,13 +52,15 @@ class InventoriesController < ApplicationController
   def update
     respond_to do |format|
       if @inventory.update(inventory_params)
-        format.html do
-          redirect_to inventory_url(@inventory), notice: "Inventory was successfully updated."
+        respond_to do |format|
+          format.json { render :show, status: :ok, location: @inventory }
+          format.html {redirect_to inventory_url(@inventory), notice: "Inventory was successfully updated."}
         end
-        format.json { render :show, status: :ok, location: @inventory }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @inventory.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          format.json { render json: @inventory.errors, status: :unprocessable_entity }
+          format.html { render :edit, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -67,10 +69,9 @@ class InventoriesController < ApplicationController
   def destroy
     @inventory = Inventory.find(params[:id])
     @inventory.destroy
-
     respond_to do |format|
-      format.html { redirect_to inventories_url, notice: "Inventory was successfully destroyed." }
       format.json { head :no_content }
+      format.html { redirect_to inventories_url, notice: "Inventory was successfully destroyed." }
     end
   end
 

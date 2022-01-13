@@ -2,8 +2,6 @@ require "test_helper"
 
 class InventoryItemTest < ActiveSupport::TestCase
 
-  Faker::Config.locale = 'en-CA'
-
   def setup
     @inventory = Inventory.create(name: "Montreal Warehouse",
                                   remark: "Montreal location heated has it gets very cold sometime")
@@ -31,6 +29,8 @@ class InventoryItemTest < ActiveSupport::TestCase
     assert_not(inventory_item_fifty.save, "Saved the Inventory with a name superior to 50")
   end
 
+
+  # TODO add tests to mirror
   
   
 end
