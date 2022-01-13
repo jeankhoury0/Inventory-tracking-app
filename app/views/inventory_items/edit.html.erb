@@ -1,0 +1,10 @@
+<h1>Editing inventory</h1>
+
+<%= render "form", inventoryItem: @inventory_item %>
+
+<br>
+
+<div>
+  <%= link_to "Show this inventory item", @inventory_item %> |
+  <%= link_to "Back to inventories", inventory_items_path %>
+</div>
