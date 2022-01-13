@@ -33,4 +33,19 @@ class Inventory < ApplicationRecord
     end
     calculated_proportions
   end
+
+  def self.to_csv
+    attributes = %w[Inventory Item Quantity]
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |inventory|
+        inventory.records.each do |record|
+          csv << [record.inventory.name, record.inventory_item.title, record.quantity]
+        end
+      end
+    end
+
+
+  end
 end

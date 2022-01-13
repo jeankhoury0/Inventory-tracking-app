@@ -1,23 +1,20 @@
 wb = xlsx_package.workbook
 
-s = wb.styles
-header = s.add_style bg_color: "DD", sz: 16, b: true, alignment: { horizontal: :center }
-
-wb.add_worksheet(name: "sheet") do |sheet|
-  sheet.add_row ["Inventory Name", "Inventory Item", "Quantity"], style: header
+wb.add_worksheet(name: "Report 1") do |sheet|
+  sheet.column_widths 50, 40, 15, 10, 40, 40, 7
+  # Standard table
+  sheet.add_row ["Inventory Name", "Inventory Item", "Quantity"]
   @inventories.each do |inventory|
-    inventory.inventory_items.each do |inventory_item|
-      sheet.add_row [inventory.name, inventory_item.title, @inventory_item.record]
+    inventory.records.each do |record|
+      sheet.add_row [record.inventory.name, record.inventory_item.title, record.quantity]
     end
   end
   sheet.add_table "A1:C#{@records.count + 1}", name: "Records"
-  sheet.column_widths 50, 40, 15
-  # chart
 
-  # sheet.add_chart(Axlsx::Bar3DChart, barDir: :col) do |chart|
-  #   chart.title = "tets"
-  #   chart.add_series labels: sheet["B2:B#{@records.count + 1}"], data: sheet["C2:C#{@records.count + 1}"]
-  #   chart.start_at 7, 16
-  #   chart.end_at 12, 31
-  # end
+  # pivot chat
+  sheet.add_pivot_table "E1:L17", "A1:C15" do |pivot_table|
+    pivot_table.rows = ["Inventory Name", "Inventory Item"]
+    pivot_table.data = ["Quantity"]
+    sheet.column_widths 40, 40, 7
+  end
 end
