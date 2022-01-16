@@ -1,30 +1,58 @@
 <div id="<%= dom_id inventory %>">
-<h1> Stock in: <span class="text-secondary"><%= inventory.name  %> | </span> 
-    <%= link_to "", edit_inventory_path(@inventory), class:"fas fa-edit", alt:"edit" %>
-</h1>
 
-<p class="font-weight-bold"><%= inventory.remark %></p>
+  <h1> Stock in: <span class="text-secondary">
+      <%= inventory.name %> |
+    </span>
+    <%= link_to "" , edit_inventory_path(@inventory), class:"fas fa-edit", alt:"edit" %>
+  </h1>
 
-<table class="table">
-  <caption>Table of all items at <%= inventory.name %> </caption>
-  <tr>
-    <th scope="col">Item_ID</th>
-    <th scope="col">Name</th>
-    <th scope="col">Quantity</th>
-    <th scope="col">Last update</th>
-  </tr>
+  <p class="font-weight-bold">
+    <%= inventory.remark %>
+  </p>
 
-    <% inventory.records.each do |record| %>
-    <tr>
-      <td><%= record.inventory_item.id %></td>
-      <td><%= record.inventory_item.title %></td>
-      <td>
-          <%= button_to "-", increment_inventory_path(:inventory_item_id => record.inventory_item_id, :count => -1), form: {style: 'display:inline-block;'}%>
-          <%= record.quantity %>
-          <%= button_to "+", increment_inventory_path(:inventory_item_id => record.inventory_item_id, :count => 1), form: {style: 'display:inline-block;'}%>
-          <td><%= record.updated_at.strftime('%m-%d |  %T') %></td>
-  <% end %>
-    <tr>
+  <%= render "layouts/error_notice" %>
 
-</table>
+    <table class="table">
+      <caption>Table of all items at <%= inventory.name %>
+      </caption>
+      <tr>
+        <th scope="col">Item_ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Last update</th>
+      </tr>
+
+      <% inventory.records.each do |record| %>
+        <tr>
+          <td>
+            <%= record.inventory_item.id %>
+          </td>
+          <td>
+            <%= record.inventory_item.title %>
+          </td>
+          <td>
+            <%= button_to "-" , increment_inventory_path(:inventory_item_id=> record.inventory_item_id, :count => -1),
+              form: {style: 'display:inline-block;'}%>
+              <%= record.quantity %>
+                <%= button_to "+" , increment_inventory_path(:inventory_item_id=> record.inventory_item_id, :count =>
+                  1), form: {style: 'display:inline-block;'}%>
+          <td>
+            <%= record.updated_at.strftime('%m-%d | %T') %>
+          </td>
+          <% end %>
+        <tr>
+
+    </table>
+
+    <h3>Link new records</h3>
+    <ul>
+      <% @inventory_items.each do |inventory| %>
+        <li>
+          <%= inventory.title %>
+            <%= button_to "add" , assign_inventory_path(:inventory_item_id=> inventory), form: {style:
+              'display:inline-block;'}%>
+        </li>
+        <% end %>
+    </ul>
+
 </div>

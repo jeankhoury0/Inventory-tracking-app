@@ -4,7 +4,7 @@
 </h1>
 
 <p class="font-weight-bold"><%= @inventory_item.remark %></p>
-
+  <%= render "layouts/error_notice" %>
 <table class="table">
   <caption>Table of all available items: <%= @inventory_item.title %> </caption>
   <tr>
@@ -29,4 +29,15 @@
 
 
 </table>
+
+   <h3>Link new records</h3>
+    <ul>
+      <% @inventories.each do |inventory| %>
+        <li>
+          <%= inventory.name %>
+            <%= button_to "add" , assign_inventory_item_path(:inventory_id=> inventory), form: {style:
+              'display:inline-block;'}%>
+        </li>
+        <% end %>
+    </ul>
 </div>

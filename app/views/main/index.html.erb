@@ -1,16 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<p style="color: green"><%=  %></p>
 <div class="container-fluid">
         <div class="bg-dark p-3">
             <h1 class="text-light">Inventory Tracking App</h1>
             <a href="https://github.com/jeankhoury0/Inventorie-tracking-app" target="_blank"> <i class="fab fa-github"> </i> Check the repo </a>    
             <br><br>
             <div>
-                <%= link_to 'Download as .xlsx', report_inventories_path(format: :xlsx), class: "btn btn-light" %>
-                <%= link_to 'Download as .csv', report_inventories_path(format: :csv), class: "btn btn-outline-light" %>
+                <%= link_to '.xlsx report', report_inventories_path(format: :xlsx), class: "btn btn-light" %>
+                <%= link_to '.csv report', report_inventories_path(format: :csv), class: "btn btn-outline-light" %>
             </div>
             <br>
         </div>
         <br>
+        <%= render "layouts/error_notice" %>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-lg-6 ">
