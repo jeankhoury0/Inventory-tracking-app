@@ -6,8 +6,16 @@ class Inventory < ApplicationRecord
 
   def increment(inventory_item, count = 1)
     record = Record.find_or_create_by(inventory_item_id: inventory_item.id, inventory_id: self.id)    
-    record.quantity += count
+    record.quantity += count.to_i
     record.save
+  end
+
+  def assign(inventory_item)
+    if Record.find_by(inventory_item_id: inventory_item.id, inventory_id: self.id) != nil
+      return raise StandardError, "This item was already added to inventory"
+    end
+
+    increment(inventory_item, count = 0 )
   end
 
   def quantity(inventory_item)
@@ -17,8 +25,8 @@ class Inventory < ApplicationRecord
 
   def total_quantity
     total = 0
-    records.each do |inventory_record|
-      total += inventory_record.quantity
+    records.each do |inventory_item|
+      total += inventory_item.quantity
     end
     total
   end

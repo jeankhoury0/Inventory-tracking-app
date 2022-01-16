@@ -7,10 +7,11 @@ Inventory tracking app that allow you to create inventory and inventory items an
 Feature: 
 
 1. Generate report with one click that shows inventory status with graph
-2. **TODO** Bulk export csv 
+3. Generate detailled report in .xlsx with pivot table for analysis
+2. Bulk export csv 
 3. View inventory and inventory item 
 4. Create, read, update, delete inventory and inventory items
-5. API endpoint return ``` json ```
+5. API endpoints return ``` json ```
 
 # Configuration
 * Ruby Version: 3.0
@@ -35,6 +36,7 @@ Feature:
 * ...
 
 ## Testing command
+ 
 
 > ``` rails test ```
 
@@ -61,6 +63,19 @@ Generate Entity-Relationship Diagrams for the app by running
 | GET        | /inventories       |    | Return list of all inventories
 | POST       | /inventories        | { "name"*,  "remark" }   | Create an inventory item and return that inventory
 | GET        | /inventories?id       |    | Return inventory of {id}
+| PUT        | /inventories?id       |    | Edit inventory with {id}
+| DELETE     | /inventories-items?id       |    | Delete inventory with {id}
+|      |       |    |
+| GET        | /inventory_items       |    | Return list of all inventory-items
+| POST       | /inventory_items        | { "title"*,  price, "remark" }   | Create an inventory item and return that inventory
+| GET        | /inventory_items?id       |    | Return inventory-items of {id}
+| PUT        | /inventory_items?id       |    | Edit inventory-items with {id}
+| DELETE     | /inventory_items?id       |    | Delete inventory-items with {id}
+|      |       |    |
+| GET        | /inventories/report.csv       |    | Generate .CSV report 
+| GET        | /inventories/report.xlsx       |    | Generate .xlsx report 
+| POST        | /inventories/id/increment       | {inventory_item_id*, count }   | Increase Inventory item in inventory 
+| POST        | /inventory_items/id/increment       | {inventory_id*, count }   | Increase inventory in Inventory item
 
 
 

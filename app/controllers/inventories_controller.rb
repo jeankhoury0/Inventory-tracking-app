@@ -24,12 +24,11 @@ class InventoriesController < ApplicationController
     end
   end
 
-  # GET /inventories/new
   def new
     @inventory = Inventory.new
   end
 
-  # GET /inventories/1/edit
+  # PUT/PATCH /inventories/1/edit
   def edit; end
 
   # POST /inventories
@@ -48,7 +47,7 @@ class InventoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /inventories/1 or /inventories/1.json
+  # PATCH/PUT /inventories/1
   def update
     respond_to do |format|
       if @inventory.update(inventory_params)
@@ -76,20 +75,38 @@ class InventoriesController < ApplicationController
   end
 
   # POST /inventories/1/increment
-  # needs inventory_item_id and count
   def increment
     @inventory = Inventory.find(params[:id])
     @inventory_item = InventoryItem.find(params[:inventory_item_id])
-    @inventory.increment(@inventory_item, params[:count].to_i || 1)
+
+    @inventory.increment(@inventory_item, params[:count] || 1)
     redirect_to @inventory
+  end
+
+  def assign
+    @inventory = Inventory.find(params[:id])
+    @inventory_item = InventoryItem.find(params[:inventory_item_id])
+    begin 
+      @inventory.assign(@inventory_item)
+      respond_to do |format|
+        format.json { render json: "OK", status: :ok}
+        format.html { redirect_to @inventory} 
+      end
+    rescue StandardError => e
+      respond_to do |format|
+        format.json { render json: e, status: :unprocessable_entity }
+        format.html { redirect_to @inventory, notice: e }
+      end
+    end
   end
 
   def report
     @inventories = Inventory.all
     @records = Record.all
     respond_to do |format|
-      format.xlsx { render xlsx: "report" }
-      format.csv { send_data @inventories.to_csv, filename: "Inventory-Report-#{Date.today}.csv" }
+      inventory_report_name = "Inventory-Report-#{Date.today}"
+      format.xlsx { render xlsx: "report", filename: inventory_report_name}
+      format.csv { send_data @inventories.to_csv, filename: "#{inventory_report_name}.csv" }
     end
   end
 

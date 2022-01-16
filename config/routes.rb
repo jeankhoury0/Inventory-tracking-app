@@ -8,18 +8,22 @@ Rails.application.routes.draw do
   # end
 
   resources :inventory_items do
+    post :increment, on: :member
+    post :assign, on: :member
     resources :inventory do
       post :increment, on: :member
     end
-    post :increment, on: :member
+    
   end
 
   resources :inventories do
+    get :report, on: :collection
+    post :increment, on: :member
+    post :assign, on: :member
     resources :inventory_item do
       post :increment, on: :member
     end
 
-    get :report, on: :collection
-    post :increment, on: :member
+    
   end
 end
