@@ -1,7 +1,7 @@
 class InventoryItem < ApplicationRecord
 
-  validates :title, presence: true, length: { maximum: 50 }
-
+  validates :title, uniqueness: true, presence: true, length: { maximum: 50 }
+  
   has_many :records, dependent: :delete_all
   has_many :inventories, through: :records
 

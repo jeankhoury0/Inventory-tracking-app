@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root "main#index"
+  root "main#index" 
+  get "/seed", to: "main#seed"
 
   # resources :inventory_item do
   #   get "/inventory_items", to: "inventory_item#index"
