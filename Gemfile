@@ -39,8 +39,6 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-gem "faker", "~> 1.6", ">= 1.6.6"
-
 # Use Sass to process CSS
 # gem "sassc-rails"
 gem "caxlsx"
@@ -58,9 +56,7 @@ group :development, :test do
   gem "rubocop-rails"
   gem "rubocop-rake"
   gem "rubocop-rspec"
-
-
-
+  gem "ffaker"
 end
 
 group :development do
