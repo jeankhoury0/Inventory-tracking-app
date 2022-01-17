@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
 require "csv"
 
-# Controller for inventory controller
+# Controller for inventory
 class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[show edit update destroy]
 
@@ -37,7 +35,7 @@ class InventoriesController < ApplicationController
     if @inventory.save
       respond_to do |format|
         format.json { render json: @inventory, status: :created, location: @inventory }
-        format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully created."}
+        format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully created." }
       end
     else
       respond_to do |format|
@@ -49,11 +47,11 @@ class InventoriesController < ApplicationController
 
   # PATCH/PUT /inventories/1
   def update
-    respond_to do |format|
+    respond_to do |_format|
       if @inventory.update(inventory_params)
         respond_to do |format|
           format.json { render :show, status: :ok, location: @inventory }
-          format.html {redirect_to inventory_url(@inventory), notice: "Inventory was successfully updated."}
+          format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully updated." }
         end
       else
         respond_to do |format|
@@ -86,11 +84,11 @@ class InventoriesController < ApplicationController
   def assign
     @inventory = Inventory.find(params[:id])
     @inventory_item = InventoryItem.find(params[:inventory_item_id])
-    begin 
+    begin
       @inventory.assign(@inventory_item)
       respond_to do |format|
-        format.json { render json: "OK", status: :ok}
-        format.html { redirect_to @inventory} 
+        format.json { render json: "OK", status: :ok }
+        format.html { redirect_to @inventory }
       end
     rescue StandardError => e
       respond_to do |format|
@@ -105,7 +103,7 @@ class InventoriesController < ApplicationController
     @records = Record.all
     respond_to do |format|
       inventory_report_name = "Inventory-Report-#{Date.today}"
-      format.xlsx { render xlsx: "report", filename: inventory_report_name}
+      format.xlsx { render xlsx: "report", filename: inventory_report_name }
       format.csv { send_data @inventories.to_csv, filename: "#{inventory_report_name}.csv" }
     end
   end

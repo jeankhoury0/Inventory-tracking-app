@@ -81,3 +81,13 @@ Generate Entity-Relationship Diagrams for the app by running
 
 
 [^1]: The environment that was setup on [https://inventory-tracking-2022.herokuapp.com/] 
+
+
+## Screenshot of the frontend
+
+Built using erb
+![Homepage](public/doc-image/ITA_Home.png)
+![View Inventory](public/doc-image/ITA_ViewInventories.png)
+
+![Excel Report](public/doc-image/ITA_Excelreport.png)
+![CSV Report](public/doc-image/ITA_CSVreport.png)

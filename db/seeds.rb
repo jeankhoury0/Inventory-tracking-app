@@ -7,19 +7,16 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 def seed
-  10.times do |i|
-    
+  8.times do |_i|
     Inventory.create(
       name: FFaker::AddressCA.city,
       remark: FFaker::Lorem.paragraph
     )
-
-
     InventoryItem.create(
       [
-        { title: FFaker::Product.product.split.last, 
-          remark: FFaker::Product.model, 
-          price: FFaker::Number.number },
+        { title: FFaker::Product.product.split.last,
+          remark: FFaker::Product.model,
+          price: FFaker::Number.number }
       ]
     )
   end
