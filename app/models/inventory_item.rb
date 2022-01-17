@@ -1,7 +1,11 @@
+# Inventory Item model
+# Schema:
+#   - title   Mandatory   unique   maxLen = 50
+#   - price   Optional
+#   - remark  Optional
 class InventoryItem < ApplicationRecord
-
   validates :title, uniqueness: true, presence: true, length: { maximum: 50 }
-  
+
   has_many :records, dependent: :delete_all
   has_many :inventories, through: :records
 
@@ -12,11 +16,12 @@ class InventoryItem < ApplicationRecord
   end
 
   def assign(inventory)
-    if Record.find_by(inventory_item_id: self.id, inventory_id: inventory.id) != nil
+    unless Record.find_by(inventory_item_id: id, inventory_id: inventory.id).nil?
       return raise StandardError, "This inventory was already added to item"
     end
 
-    increment(inventory_item, count = 0 )
+    count = 0
+    increment(inventory_item, count)
   end
 
   def quantity(inventory)
@@ -41,5 +46,4 @@ class InventoryItem < ApplicationRecord
     end
     calculated_proportions
   end
-
 end

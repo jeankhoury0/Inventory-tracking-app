@@ -1,3 +1,4 @@
+# Controller for inventory items
 class InventoryItemsController < ApplicationController
   before_action :set_inventory_item, only: %i[show edit update destroy]
 
@@ -14,7 +15,7 @@ class InventoryItemsController < ApplicationController
   def show
     @inventories = Inventory.all
     respond_to do |format|
-      format.json { render json: @inventory}
+      format.json { render json: @inventory }
       format.html { render :show }
     end
   end
@@ -31,7 +32,7 @@ class InventoryItemsController < ApplicationController
     if @inventory_item.save
       respond_to do |format|
         format.json { render json: @inventory_item, status: :created, location: @inventory_item }
-        format.html { redirect_to inventory_item_url(@inventory_item), notice: "Inventory Item successfully created."}
+        format.html { redirect_to inventory_item_url(@inventory_item), notice: "Inventory Item successfully created." }
       end
     else
       respond_to do |format|
@@ -43,11 +44,13 @@ class InventoryItemsController < ApplicationController
 
   # PATCH/PUT /inventory_items/1
   def update
-    respond_to do |format|
+    respond_to do |_format|
       if @inventory_item.update(inventory_item_params)
         respond_to do |format|
           format.json { render :show, status: :ok, location: @inventory_item }
-          format.html{ redirect_to inventory_item_url(@inventory_item), notice: "Inventory Item was successfully updated." }
+          format.html do
+            redirect_to inventory_item_url(@inventory_item), notice: "Inventory Item was successfully updated."
+          end
         end
       else
         respond_to do |format|
@@ -79,11 +82,11 @@ class InventoryItemsController < ApplicationController
   def assign
     @inventory = Inventory.find(params[:inventory_id])
     @inventory_item = InventoryItem.find(params[:id])
-    begin 
+    begin
       @inventory.assign(@inventory_item)
       respond_to do |format|
-        format.json { render json: "OK", status: :ok}
-        format.html { redirect_to @inventory_item} 
+        format.json { render json: "OK", status: :ok }
+        format.html { redirect_to @inventory_item }
       end
     rescue StandardError => e
       respond_to do |format|
@@ -92,7 +95,6 @@ class InventoryItemsController < ApplicationController
       end
     end
   end
-
 
   private
 

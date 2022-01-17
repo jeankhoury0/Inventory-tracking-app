@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "main#index" 
+  root "main#index"
   get "/seed", to: "main#seed"
 
   # resources :inventory_item do
@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     resources :inventory do
       post :increment, on: :member
     end
-    
   end
 
   resources :inventories do
@@ -24,7 +23,5 @@ Rails.application.routes.draw do
     resources :inventory_item do
       post :increment, on: :member
     end
-
-    
   end
 end
