@@ -1,8 +1,11 @@
 # README
+
+![Intenty Realtiion diagram](erd.png)
+
 ## About
 Inventory tracking app that allow you to create inventory and inventory items and to asign inventory item to inventory.
 
-**Application was published on https://inventory-tracking-2022.herokuapp.com/**
+**Application was published on https://inventory-tracking.jeankhoury.com/
 
 Feature: 
 
@@ -12,6 +15,7 @@ Feature:
 3. View inventory and inventory item 
 4. Create, read, update, delete inventory and inventory items
 5. API endpoints return ``` json ```
+
 
 # Configuration
 * Ruby Version: 3.0
@@ -80,7 +84,7 @@ Generate Entity-Relationship Diagrams for the app by running
 
 
 
-[^1]: The environment that was setup on [https://inventory-tracking-2022.herokuapp.com/] 
+[^1]: The environment that was setup on [https://inventory-tracking.jeankhoury.com/] 
 
 
 ## Screenshot of the frontend
