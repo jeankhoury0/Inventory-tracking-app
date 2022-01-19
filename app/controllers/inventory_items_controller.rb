@@ -14,6 +14,7 @@ class InventoryItemsController < ApplicationController
   # GET inventory_items/1
   def show
     @inventories = Inventory.all
+    @inventory_item_records = @inventory_item.records
     respond_to do |format|
       format.json { render json: @inventory }
       format.html { render :show }
@@ -32,7 +33,7 @@ class InventoryItemsController < ApplicationController
     if @inventory_item.save
       respond_to do |format|
         format.json { render json: @inventory_item, status: :created, location: @inventory_item }
-        format.html { redirect_to inventory_item_url(@inventory_item), notice: "Inventory Item successfully created." }
+        format.html { redirect_to root_path, notice: "Inventory Item successfully created." }
       end
     else
       respond_to do |format|
@@ -44,19 +45,17 @@ class InventoryItemsController < ApplicationController
 
   # PATCH/PUT /inventory_items/1
   def update
-    respond_to do |_format|
-      if @inventory_item.update(inventory_item_params)
-        respond_to do |format|
-          format.json { render :show, status: :ok, location: @inventory_item }
-          format.html do
-            redirect_to inventory_item_url(@inventory_item), notice: "Inventory Item was successfully updated."
-          end
+    if @inventory_item.update(inventory_item_params)
+      respond_to do |format|
+        format.json { render :show, status: :ok, location: @inventory_item }
+        format.html do
+          redirect_to root_path, notice: "Inventory Item was successfully updated."
         end
-      else
-        respond_to do |format|
-          format.json { render json: @inventory_item.errors, status: :unprocessable_entity }
-          format.html { render :edit, status: :unprocessable_entity }
-        end
+      end
+    else
+      respond_to do |format|
+        format.json { render json: @inventory_item.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end

@@ -35,7 +35,7 @@ class InventoriesController < ApplicationController
     if @inventory.save
       respond_to do |format|
         format.json { render json: @inventory, status: :created, location: @inventory }
-        format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully created." }
+        format.html { redirect_to root_path, notice: "Inventory was successfully created." }
       end
     else
       respond_to do |format|
@@ -47,17 +47,15 @@ class InventoriesController < ApplicationController
 
   # PATCH/PUT /inventories/1
   def update
-    respond_to do |_format|
-      if @inventory.update(inventory_params)
-        respond_to do |format|
-          format.json { render :show, status: :ok, location: @inventory }
-          format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully updated." }
-        end
-      else
-        respond_to do |format|
-          format.json { render json: @inventory.errors, status: :unprocessable_entity }
-          format.html { render :edit, status: :unprocessable_entity }
-        end
+    if @inventory.update(inventory_params)
+      respond_to do |format|
+        format.json { render :show, status: :ok, location: @inventory }
+        format.html { redirect_to root_path, notice: "Inventory was successfully updated." }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: @inventory.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end

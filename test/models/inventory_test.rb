@@ -23,7 +23,7 @@ class InventoryTest < ActiveSupport::TestCase
   end
 
   test "should increment by one if no count param is passed" do
-    record = Record.create(quantity: Faker::Number.non_zero_digit, inventory_item_id: @inventory_item.id,
+    record = Record.create(quantity: FFaker::Number.number, inventory_item_id: @inventory_item.id,
                            inventory_id: @inventory.id)
     expected_quantity = record.quantity + 1
 
@@ -34,9 +34,9 @@ class InventoryTest < ActiveSupport::TestCase
   end
 
   test "should increment by a quantity" do
-    record = Record.create(quantity: Faker::Number.non_zero_digit, inventory_item_id: @inventory_item.id,
+    record = Record.create(quantity: FFaker::Number.number, inventory_item_id: @inventory_item.id,
                            inventory_id: @inventory.id)
-    increment = Faker::Number.non_zero_digit.to_i
+    increment = FFaker::Number.number
     expected_quantity = record.quantity + increment
 
     @inventory.increment(@inventory_item, increment)
@@ -48,7 +48,7 @@ class InventoryTest < ActiveSupport::TestCase
   test "should be able to find quantity" do
     inventory = Inventory.create(name: "Montreal Warehouse",
                                  remark: "Montreal location heated has it gets very cold sometime")
-    record = Record.create(quantity: Faker::Number.non_zero_digit, inventory_item_id: @inventory_item.id,
+    record = Record.create(quantity: FFaker::Number.number, inventory_item_id: @inventory_item.id,
                            inventory_id: inventory.id)
 
     expected_quantity = record.quantity
@@ -59,9 +59,9 @@ class InventoryTest < ActiveSupport::TestCase
 
   test "should be able to extract total quantity" do
     inventory_item_second = InventoryItem.create(title: "Keyboard", remark: "This is a keyboard", price: 30)
-    first_record = Record.create(quantity: Faker::Number.non_zero_digit, inventory_item_id: @inventory_item.id,
+    first_record = Record.create(quantity: FFaker::Number.number, inventory_item_id: @inventory_item.id,
                                  inventory_id: @inventory.id)
-    second_record = Record.create(quantity: Faker::Number.non_zero_digit, inventory_item_id: inventory_item_second.id,
+    second_record = Record.create(quantity: FFaker::Number.number, inventory_item_id: inventory_item_second.id,
                                   inventory_id: @inventory.id)
 
     expected_total_quantity = first_record.quantity + second_record.quantity

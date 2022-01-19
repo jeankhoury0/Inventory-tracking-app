@@ -3,7 +3,7 @@
   <h1> Stock in: <span class="text-secondary">
       <%= inventory.name %> |
     </span>
-    <%= link_to "" , edit_inventory_path(@inventory), class:"fas fa-edit", alt:"edit" %>
+    <%= link_to "" , edit_inventory_path(inventory), class:"fas fa-edit", alt:"edit" %>
   </h1>
 
   <p class="font-weight-bold">
@@ -46,10 +46,10 @@
 
     <h3>Link new records</h3>
     <ul>
-      <% @inventory_items.each do |inventory| %>
+      <% @inventory_items.each do |inventory_item| %>
         <li>
-          <%= inventory.title %>
-            <%= button_to "add" , assign_inventory_path(:inventory_item_id=> inventory), form: {style:
+          <%= inventory_item.title %>
+            <%= button_to "add" , assign_inventory_path(:inventory_item_id=> inventory_item), form: {style:
               'display:inline-block;'}%>
         </li>
         <% end %>

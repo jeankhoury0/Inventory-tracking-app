@@ -15,13 +15,12 @@ class InventoryItem < ApplicationRecord
     record.save
   end
 
-  def assign(inventory)
-    unless Record.find_by(inventory_item_id: id, inventory_id: inventory.id).nil?
+  def assign(inventory, initial_count = 0)
+    if Record.exists?(inventory_item_id: id, inventory_id: inventory.id)
       return raise StandardError, "This inventory was already added to item"
     end
 
-    count = 0
-    increment(inventory_item, count)
+    increment(inventory_item, initial_count)
   end
 
   def quantity(inventory)
